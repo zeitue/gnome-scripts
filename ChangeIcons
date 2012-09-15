@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" == "random" ]; then
+files=(~/.icons/*)
+base=$(basename "${files[RANDOM % ${#files[@]}]}")
+gconftool-2 --type=string -s /desktop/gnome/interface/icon_theme  $base
+else
+if [  "$1" == "" ];  then
+	echo "Usage: $0 icon_theme_name"
+ 	echo "or $0 random  / for a random pick"
+else
+#Icons
+gconftool-2 --type=string -s /desktop/gnome/interface/icon_theme $1
+fi
+fi

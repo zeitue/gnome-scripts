@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" == "random" ]; then
+files=(~/.themes/*)
+base=$(basename "${files[RANDOM % ${#files[@]}]}")
+gconftool-2 --type=string -s /desktop/gnome/interface/gtk_theme $base
+else
+if [  "$1" == "" ];  then
+	echo "Usage: $0 GTK_theme_name"
+ 	echo "or $0 random  / for a random pick"
+else
+#GTK theme
+gconftool-2 --type=string -s /desktop/gnome/interface/gtk_theme $1
+ fi
+fi

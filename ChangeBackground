@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ "$1" == "random" ]; then
+files=(~/.backgrounds/*)
+gconftool-2 -t str --set /desktop/gnome/background/picture_filename  "${files[RANDOM % ${#files[@]}]}"
+else
+if [  "$1" == "" ];  then
+	echo "Usage: $0 path/to/background"
+ 	echo "or $0 random  / for a random pick"
+else
+#Wallpaper
+gconftool-2 -t str --set /desktop/gnome/background/picture_filename $1 
+fi
+fi
